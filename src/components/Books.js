@@ -12,10 +12,6 @@ const Books = (props) => {
   const books = result.data.allBooks
   const authors = result.data.allAuthors
 
-  console.log('Books: ', books)
-  console.log('Authors: ', authors)
-
-
   return (
     <div>
       <h2>books</h2>
