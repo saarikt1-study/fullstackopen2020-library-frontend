@@ -1,24 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
-import { LOGIN, ALL_AUTHORS, ALL_BOOKS} from '../queries'
+import { LOGIN } from '../queries'
 
 const Login = (props) => {
-  const [name, setName] = useState('')
+  const [username, setName] = useState('')
   const [password, setPassword] = useState('')
-  // const [ login ] = useMutation(LOGIN, {
-  //   refetchQueries: [ { query: ALL_BOOKS }, { query: ALL_AUTHORS }]
-  // })
+  const [ login, result ] = useMutation(LOGIN)
 
-  if (!props.show) {
-    return null
-  }
+  useEffect(() => {
+    if ( result.data ) {
+      const token = result.data.login.value
+      props.setToken(token)
+      localStorage.setItem('books-user-token', token)
+    }
+  }, [result.data]) // eslint-disable-line
 
   const submit = async (event) => {
     event.preventDefault()
-    console.log("Login with ", name, password)
-
+    login({ variables: { username, password } })
+    
     setName('')
     setPassword('')
+  }
+  
+  if (!props.show) {
+    return null
   }
 
   return (
@@ -27,7 +33,7 @@ const Login = (props) => {
         <div>
           Name
           <input
-            value={name}
+            value={username}
             onChange={({ target }) => setName(target.value)}
           />
         </div>

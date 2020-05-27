@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
@@ -6,6 +6,7 @@ import Login from './components/Login'
 
 const App = () => {
   const [page, setPage] = useState('authors')
+  const [token, setToken] = useState(null)
 
   return (
     <div>
@@ -29,6 +30,7 @@ const App = () => {
       />
 
       <Login
+        setToken={setToken}
         show={page === 'login'}
       />
 
