@@ -13,10 +13,11 @@ const Authors = (props) => {
   
   const result = useQuery(ALL_AUTHORS)
   
-  if (!props.show || result.loading) {
+  if (!props.show || result.loading || !result.data) {
     return null
   }
   const authors = result.data.allAuthors
+  const books = result.data.allBooks
 
   const submit = async (event) => {
     event.preventDefault()
@@ -42,7 +43,7 @@ const Authors = (props) => {
             </th>
           </tr>
           {authors.map(a =>
-            <tr key={a.name}>
+            <tr key={a.id}>
               <td>{a.name}</td>
               <td>{a.born}</td>
               <td>{a.bookCount}</td>

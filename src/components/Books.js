@@ -10,6 +10,10 @@ const Books = (props) => {
     return null
   }
   const books = result.data.allBooks
+  const authors = result.data.allAuthors
+
+  console.log('Books: ', books)
+  console.log('Authors: ', authors)
 
 
   return (
@@ -27,11 +31,11 @@ const Books = (props) => {
               published
             </th>
           </tr>
-          {books.map(a =>
-            <tr key={a.title}>
-              <td>{a.title}</td>
-              <td>{a.author}</td>
-              <td>{a.published}</td>
+          {books.map(b =>
+            <tr key={b.title}>
+              <td>{b.title}</td>
+              <td>{authors.find(a => a.id === b.author.id).name}</td>
+              <td>{b.published}</td>
             </tr>
           )}
         </tbody>
