@@ -46,7 +46,7 @@ const Authors = (props) => {
             <tr key={a.id}>
               <td>{a.name}</td>
               <td>{a.born}</td>
-              <td>{a.bookCount}</td>
+              <td>{books.filter(b => b.author.id === a.id).length}</td>
             </tr>
           )}
         </tbody>
@@ -57,6 +57,7 @@ const Authors = (props) => {
           Name
           <label>
           <select value={name} onChange={(event) => setName(event.target.value)}>
+            <option value="">Choose author...</option>
             {authors.map(author => 
               <option key={author.id} value={author.name}>{author.name}</option>
             )}
