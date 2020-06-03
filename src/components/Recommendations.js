@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useQuery } from '@apollo/client'
 import { GET_CURRENT_USER, ALL_BOOKS } from '../queries'
 
 const Recommendations = (props) => {
-  const [genre, setGenre] = useState('All genres')
 
   const currentUser = useQuery(GET_CURRENT_USER)
   const result = useQuery(ALL_BOOKS)
